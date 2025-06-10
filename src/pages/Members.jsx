@@ -1,10 +1,16 @@
-
-
-import { useState } from "react"
-import { Search, Plus, Calendar, SlidersHorizontal, Filter, MoreVertical, ChevronDown } from "lucide-react"
-
+import { useState } from "react";
+import {
+  Search,
+  Plus,
+  Calendar,
+  SlidersHorizontal,
+  Filter,
+  MoreVertical,
+  ChevronDown,
+} from "lucide-react";
+import Sidebar from "../components/Sidebar";
 export default function MembersPage() {
-  const [searchQuery, setSearchQuery] = useState("")
+  const [searchQuery, setSearchQuery] = useState("");
 
   const members = [
     {
@@ -95,183 +101,199 @@ export default function MembersPage() {
       joinDate: "9/30/2021",
       attendance: 95,
     },
-  ]
+  ];
 
   const getStatusColor = (status) => {
     switch (status) {
       case "Active":
-        return "text-green-700 bg-green-50"
+        return "text-green-700 bg-green-50";
       case "Inactive":
-        return "text-amber-700 bg-amber-50"
+        return "text-amber-700 bg-amber-50";
       case "Pending":
-        return "text-gray-700 bg-gray-50"
+        return "text-gray-700 bg-gray-50";
       default:
-        return "text-gray-700 bg-gray-50"
+        return "text-gray-700 bg-gray-50";
     }
-  }
+  };
 
   const getAttendanceColor = (attendance) => {
-    if (attendance >= 80) return "text-green-600"
-    if (attendance >= 60) return "text-amber-600"
-    return "text-red-600"
-  }
+    if (attendance >= 80) return "text-green-600";
+    if (attendance >= 60) return "text-amber-600";
+    return "text-red-600";
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Page Header */}
-        <h1 className="text-2xl font-semibold mb-6">Church Members</h1>
+    <div className="min-h-screen bg-gray-50 p-6 flex flex-row">
+      <aside className="">
+        <Sidebar />
+      </aside>
+      <main className="w-full h-174 p-2 overflow-auto">
+        <div className="max-w-7xl mx-auto">
+          {/* Page Header */}
+          <h1 className="text-2xl font-semibold mb-6">Church Members</h1>
 
-        {/* Search and Add Member */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-          <div className="relative">
-            <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
-            <input
-              type="text"
-              placeholder="Search members..."
-              className="pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 w-64"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
+          {/* Search and Add Member */}
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+            <div className="relative">
+              <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+              <input
+                type="text"
+                placeholder="Search members..."
+                className="pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 w-64"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+
+            <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+              <Plus className="w-4 h-4" />
+              Add Member
+            </button>
           </div>
 
-          <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
-            <Plus className="w-4 h-4" />
-            Add Member
-          </button>
-        </div>
+          {/* Filters */}
+          <div className="flex flex-wrap items-center gap-3 mb-8">
+            <div className="relative">
+              <select className="appearance-none pl-4 pr-10 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 bg-white">
+                <option>All Statuses</option>
+                <option>Active</option>
+                <option>Inactive</option>
+                <option>Pending</option>
+              </select>
+              <ChevronDown className="w-4 h-4 text-gray-400 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" />
+            </div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap items-center gap-3 mb-8">
-          <div className="relative">
-            <select className="appearance-none pl-4 pr-10 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 bg-white">
-              <option>All Statuses</option>
-              <option>Active</option>
-              <option>Inactive</option>
-              <option>Pending</option>
-            </select>
-            <ChevronDown className="w-4 h-4 text-gray-400 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" />
+            <div className="relative">
+              <select className="appearance-none pl-4 pr-10 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 bg-white">
+                <option>All Categories</option>
+                <option>Leadership</option>
+                <option>Volunteers</option>
+                <option>Youth</option>
+                <option>Children</option>
+              </select>
+              <ChevronDown className="w-4 h-4 text-gray-400 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" />
+            </div>
+
+            <button className="flex items-center gap-2 px-4 py-2 text-sm border border-gray-300 rounded-md bg-white hover:bg-gray-50">
+              <Calendar className="w-4 h-4" />
+              Join Date
+            </button>
+
+            <button className="flex items-center gap-2 px-4 py-2 text-sm border border-gray-300 rounded-md bg-white hover:bg-gray-50">
+              <SlidersHorizontal className="w-4 h-4" />
+              More Filters
+            </button>
           </div>
 
-          <div className="relative">
-            <select className="appearance-none pl-4 pr-10 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 bg-white">
-              <option>All Categories</option>
-              <option>Leadership</option>
-              <option>Volunteers</option>
-              <option>Youth</option>
-              <option>Children</option>
-            </select>
-            <ChevronDown className="w-4 h-4 text-gray-400 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" />
-          </div>
+          {/* Members Table */}
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+              <h2 className="font-medium">Church Members</h2>
 
-          <button className="flex items-center gap-2 px-4 py-2 text-sm border border-gray-300 rounded-md bg-white hover:bg-gray-50">
-            <Calendar className="w-4 h-4" />
-            Join Date
-          </button>
+              <div className="flex items-center gap-3">
+                <div className="relative">
+                  <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+                  <input
+                    type="text"
+                    placeholder="Search members..."
+                    className="pl-10 pr-4 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 w-48"
+                  />
+                </div>
 
-          <button className="flex items-center gap-2 px-4 py-2 text-sm border border-gray-300 rounded-md bg-white hover:bg-gray-50">
-            <SlidersHorizontal className="w-4 h-4" />
-            More Filters
-          </button>
-        </div>
+                <button className="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                  <Filter className="w-4 h-4" />
+                </button>
 
-        {/* Members Table */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-          <div className="flex items-center justify-between p-4 border-b border-gray-200">
-            <h2 className="font-medium">Church Members</h2>
-
-            <div className="flex items-center gap-3">
-              <div className="relative">
-                <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
-                <input
-                  type="text"
-                  placeholder="Search members..."
-                  className="pl-10 pr-4 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 w-48"
-                />
+                <button className="flex items-center gap-2 px-4 py-1.5 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition-colors">
+                  <Plus className="w-4 h-4" />
+                  Add Member
+                </button>
               </div>
+            </div>
 
-              <button className="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
-                <Filter className="w-4 h-4" />
-              </button>
-
-              <button className="flex items-center gap-2 px-4 py-1.5 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition-colors">
-                <Plus className="w-4 h-4" />
-                Add Member
-              </button>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="text-left text-sm text-gray-500 border-b border-gray-200">
+                    <th className="px-4 py-3 font-medium">Member</th>
+                    <th className="px-4 py-3 font-medium">Contact</th>
+                    <th className="px-4 py-3 font-medium">Status</th>
+                    <th className="px-4 py-3 font-medium">Join Date</th>
+                    <th className="px-4 py-3 font-medium">Attendance</th>
+                    <th className="px-4 py-3 font-medium">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {members.map((member) => (
+                    <tr
+                      key={member.id}
+                      className="border-b border-gray-200 hover:bg-gray-50"
+                    >
+                      <td className="px-4 py-3">
+                        <div className="flex items-center gap-3">
+                          <div
+                            className={`w-8 h-8 rounded-full ${member.bgColor} flex items-center justify-center text-sm font-medium`}
+                          >
+                            {member.initials}
+                          </div>
+                          <div className="font-medium">{member.name}</div>
+                        </div>
+                      </td>
+                      <td className="px-4 py-3">
+                        <div className="text-sm">
+                          <div>{member.email}</div>
+                          <div className="text-gray-500">{member.phone}</div>
+                        </div>
+                      </td>
+                      <td className="px-4 py-3">
+                        <span
+                          className={`inline-block px-2 py-1 text-xs rounded-full ${getStatusColor(
+                            member.status
+                          )}`}
+                        >
+                          {member.status}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 text-sm">{member.joinDate}</td>
+                      <td className="px-4 py-3">
+                        <span
+                          className={`font-medium ${getAttendanceColor(
+                            member.attendance
+                          )}`}
+                        >
+                          {member.attendance}%
+                        </span>
+                      </td>
+                      <td className="px-4 py-3">
+                        <button className="p-1 text-gray-400 hover:text-gray-600">
+                          <MoreVertical className="w-5 h-5" />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="text-left text-sm text-gray-500 border-b border-gray-200">
-                  <th className="px-4 py-3 font-medium">Member</th>
-                  <th className="px-4 py-3 font-medium">Contact</th>
-                  <th className="px-4 py-3 font-medium">Status</th>
-                  <th className="px-4 py-3 font-medium">Join Date</th>
-                  <th className="px-4 py-3 font-medium">Attendance</th>
-                  <th className="px-4 py-3 font-medium">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {members.map((member) => (
-                  <tr key={member.id} className="border-b border-gray-200 hover:bg-gray-50">
-                    <td className="px-4 py-3">
-                      <div className="flex items-center gap-3">
-                        <div
-                          className={`w-8 h-8 rounded-full ${member.bgColor} flex items-center justify-center text-sm font-medium`}
-                        >
-                          {member.initials}
-                        </div>
-                        <div className="font-medium">{member.name}</div>
-                      </div>
-                    </td>
-                    <td className="px-4 py-3">
-                      <div className="text-sm">
-                        <div>{member.email}</div>
-                        <div className="text-gray-500">{member.phone}</div>
-                      </div>
-                    </td>
-                    <td className="px-4 py-3">
-                      <span className={`inline-block px-2 py-1 text-xs rounded-full ${getStatusColor(member.status)}`}>
-                        {member.status}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 text-sm">{member.joinDate}</td>
-                    <td className="px-4 py-3">
-                      <span className={`font-medium ${getAttendanceColor(member.attendance)}`}>
-                        {member.attendance}%
-                      </span>
-                    </td>
-                    <td className="px-4 py-3">
-                      <button className="p-1 text-gray-400 hover:text-gray-600">
-                        <MoreVertical className="w-5 h-5" />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          {/* Footer */}
+          <footer className="mt-8 pt-4 text-center text-xs text-gray-500 border-t border-gray-200">
+            © 2025 LampConnect Church Management System
+            <span className="mx-2">·</span>
+            <a href="#" className="text-gray-500 hover:text-gray-700">
+              Privacy Policy
+            </a>
+            <span className="mx-2">·</span>
+            <a href="#" className="text-gray-500 hover:text-gray-700">
+              Terms of Service
+            </a>
+            <span className="mx-2">·</span>
+            <a href="#" className="text-gray-500 hover:text-gray-700">
+              Help
+            </a>
+          </footer>
         </div>
-
-        {/* Footer */}
-        <footer className="mt-8 pt-4 text-center text-xs text-gray-500 border-t border-gray-200">
-          © 2025 LampConnect Church Management System
-          <span className="mx-2">·</span>
-          <a href="#" className="text-gray-500 hover:text-gray-700">
-            Privacy Policy
-          </a>
-          <span className="mx-2">·</span>
-          <a href="#" className="text-gray-500 hover:text-gray-700">
-            Terms of Service
-          </a>
-          <span className="mx-2">·</span>
-          <a href="#" className="text-gray-500 hover:text-gray-700">
-            Help
-          </a>
-        </footer>
-      </div>
+      </main>
     </div>
-  )
+  );
 }
