@@ -172,12 +172,12 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen flex flex-row bg-gray-50">
       {/* Top Header */}
       <aside className="w-70">
         <Sidebar />
       </aside>
-      <div className="w-full h-174">
+      <div className="w-full h-174 p-2">
         <header className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between">
           <h1 className="text-lg font-medium">Dashboard</h1>
 
