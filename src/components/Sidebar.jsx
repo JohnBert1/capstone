@@ -1,6 +1,6 @@
 import React from 'react'
-
-
+import {useLocation, useNavigate} from "react-router-dom"
+import clx from "clsx"
 //icons
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import { TbLayoutDashboard } from "react-icons/tb";
@@ -11,15 +11,15 @@ import { VscGraph } from "react-icons/vsc";
 import { IoSettingsOutline } from "react-icons/io5";
 import { LuLogOut } from "react-icons/lu";
 function Sidebar() {
-
+  const navigate = useNavigate()
   //const sideBarTabs = ["Dashboard", "Members", "Attendance", "Resources", "Analytics", "Settings"]
   const sideBarTabs = [
-  {label: 'Dashboard', icon: <TbLayoutDashboard size={30}/> },
-  {label: 'Members', icon: <LuUsers size={30}/>},
-  {label: 'Attendance', icon: <LuCalendarCheck size={30}/>},
+  {label: 'Dashboard', icon: <TbLayoutDashboard size={30}/>, link: "/dashboard" },
+  {label: 'Members', icon: <LuUsers size={30}/>, link: "/members"},
+  {label: 'Attendance', icon: <LuCalendarCheck size={30}/>, link: "/attendance"},
   {label: 'Resources', icon: <IoBookOutline size={30} />},
-  {label: 'Analytics', icon: <VscGraph size={30}/>},
-  {label: 'Settings', icon: <IoSettingsOutline size={30}/>}
+  {label: 'Analytics', icon: <VscGraph size={30}/>, link: "/analytics"},
+  {label: 'Settings', icon: <IoSettingsOutline size={30}/>, link: "/settings"}
   ];
   return (
     <div className='w-full'>
@@ -41,7 +41,8 @@ function Sidebar() {
         <ul className='flex flex-col gap-2'>
           {sideBarTabs.map((tabs, index) => (
             <li
-            className='flex text-xl p-3 rounded-lg gap-2 flex-row items-center hover:bg-gray-200'
+            onClick={() => navigate(tabs.link)}
+            className={clx('flex text-xl p-3 rounded-lg gap-2 flex-row items-center hover:bg-gray-200', location.pathname === tabs.link ? "bg-gray-200": "")}
             key={index}>
               {tabs.icon}
               {tabs.label}
