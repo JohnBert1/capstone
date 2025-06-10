@@ -123,8 +123,8 @@ export default function MembersPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 flex flex-row">
-      <aside className="">
+    <div className="min-h-screen p-6 flex flex-row">
+      <aside className="w-70">
         <Sidebar />
       </aside>
       <main className="w-full h-174 p-2 overflow-auto">

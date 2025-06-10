@@ -58,7 +58,7 @@ export default function Dashboard() {
 
   return (
     <div className='w-screen h-screen flex flex-row'>
-      <div className='w-70 bg-gray-200 border-r-2 border-gray-200'>
+      <div className='w-70  border-r-2'>
         <Sidebar />
       </div>
 
