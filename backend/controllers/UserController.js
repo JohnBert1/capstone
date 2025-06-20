@@ -5,11 +5,13 @@ exports.createUser = async (req, res) => {
     try{
         const {email, password, role, status} = req.body;
 
+
         if (!email || !password) {
             return res.status(400).json({ success: false, message: 'Email and password are required' });
         }
 
         const userExists = await User.findOne({ where: { email } });
+
         if (userExists) {
             return res.status(400).json({ success: false, message: 'User already exists' });
         }
