@@ -81,7 +81,7 @@ function LoginPage() {
                         </div>
                         <div onClick={() => navigate("/dashboard")} className="flex justify-center items-center bg-gray-900 text-white rounded-md px-4 py-2 gap-2 hover:bg-gray-700">
                             <FiLogIn size={20}/>
-                            <button type="button" >Sign up</button>
+                            <button type="button" >Sign in</button>
                         </div>
 
                         <div className="mt-2">
